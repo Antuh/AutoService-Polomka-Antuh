@@ -114,5 +114,11 @@ namespace AutoService.pages
         {
             NavigationService.Navigate(new AddClient(null));
         }
+
+        private void LViewClient_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new AddClient(LViewClient.SelectedItem as Client));
+
+        }
     }
 }

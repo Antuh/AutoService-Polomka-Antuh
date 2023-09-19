@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -72,34 +73,34 @@ namespace AutoService.pages
                 }
             }
         }
-        private bool IsLettersOnly(string input)
+        private bool ContainsNumbers(string text)
         {
-            // Используем регулярное выражение для проверки, что строка состоит только из букв
-            return !string.IsNullOrEmpty(input) && Regex.IsMatch(input, "^[a-zA-Z]+$");
+            return text.Any(char.IsDigit);
         }
 
         private void btnSaveClient_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(txtFirstName.Text) ||
-            string.IsNullOrEmpty(txtLastName.Text) ||
-            string.IsNullOrEmpty(txtPatronymic.Text) ||
-            string.IsNullOrEmpty(txtEmail.Text) ||
-            string.IsNullOrEmpty(txtPhone.Text) ||
-            txtGender.SelectedItem == null ||
-            dtbirth.SelectedDate == null)
+                string.IsNullOrEmpty(txtLastName.Text) ||
+                string.IsNullOrEmpty(txtPatronymic.Text) ||
+                string.IsNullOrEmpty(txtEmail.Text) ||
+                string.IsNullOrEmpty(txtPhone.Text) ||
+                txtGender.SelectedItem == null ||
+                dtbirth.SelectedDate == null)
             {
                 MessageBox.Show("Не все поля заполнены");
             }
-            else if (!IsLettersOnly(txtFirstName.Text) || !IsLettersOnly(txtPatronymic.Text))
+            else if (ContainsNumbers(txtFirstName.Text) ||
+                     ContainsNumbers(txtLastName.Text) ||
+                     ContainsNumbers(txtPatronymic.Text))
             {
-                MessageBox.Show("Имя и отчество должны содержать только буквы");
+                MessageBox.Show("Имя, фамилия и отчество не должны содержать цифры");
             }
             else
             {
                 if (_editClient == false)
                 {
-                    
-                    var client = new Client
+                    var newClient = new Client
                     {
                         FirstName = txtFirstName.Text,
                         LastName = txtLastName.Text,
@@ -111,7 +112,11 @@ namespace AutoService.pages
                         RegistrationDate = DateTime.Now
                     };
 
-                    EntitiesAutos.GetContext().Client.Add(client);
+                    EntitiesAutos.GetContext().Client.Add(newClient);
+                }
+                else
+                {
+                    
                 }
 
                 try

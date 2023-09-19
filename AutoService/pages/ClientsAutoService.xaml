@@ -43,7 +43,7 @@
         </StackPanel>
 
 
-        <ListView Name="LViewClient" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="5,5,5,5">
+        <ListView Name="LViewClient" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="5,5,5,5" MouseDoubleClick="LViewClient_MouseDoubleClick">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -75,7 +75,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button x:Name="btnEditClient" Grid.Row="3" Grid.Column="2" Content="Изменить клиента" HorizontalAlignment="Left" Width="200" Margin="20,0,0,0" Click="btnEditClient_Click"/>
+        <Button x:Name="btnEditClient" Grid.Row="3" Grid.Column="2" Content="Изменить" HorizontalAlignment="Left" Width="200" Margin="20,0,0,0" Click="btnEditClient_Click"/>
         <Button x:Name="btnAddNewClient" Content="Добавить клиента" Grid.Row="3" Grid.Column="1" Width="200" HorizontalAlignment="Left" Click="btnAddNewClient_Click"/>
     </Grid>
 </Page>
