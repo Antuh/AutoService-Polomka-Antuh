@@ -11,7 +11,8 @@ namespace AutoService.model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class Client
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,7 +29,13 @@ namespace AutoService.model
                 return path;
             }
         }
-
+        public List<Tag> TagList
+        {
+            get
+            {
+                return this.Tag.ToList();
+            }
+        }
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

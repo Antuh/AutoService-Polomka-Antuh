@@ -10,73 +10,156 @@
 
     <Page.Resources>
         <sys:String x:Key="defaultImage">
-            pack://application:,,,/Resourse/Product/picture.png
+            pack://application:,,,/Resourse/Agent/picture.png
         </sys:String>
     </Page.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220*"/>
-            <ColumnDefinition Width="200*"/>
-            <ColumnDefinition Width="200*"/>
-            <ColumnDefinition Width="80*"/>
-        </Grid.ColumnDefinitions>
+    <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="56"/>
-            <RowDefinition/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3" HorizontalAlignment="Right">
-            <TextBlock x:Name="txtFullname"/>
-        </StackPanel>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <ComboBox Name="cmbCount" Grid.Column="1" SelectedIndex="0" VerticalAlignment="Center" Height="22" Margin="0,0,10,0" SelectionChanged="cmbCount_SelectionChanged" />
+            <TextBox VerticalAlignment="Center" Margin="0,0,10,0" Height="22" TextChanged="TextBox_TextChanged"/>
+            <ComboBox x:Name="cmbSorting" Grid.Column="2" SelectedIndex="0" VerticalAlignment="Center" SelectionChanged="cmbSorting_SelectionChanged" Height="22" Margin="5, 0, 5, 0" />
 
-        <TextBox Name="txtSearch" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5,0,5,0" SelectionChanged="txtSearch_SelectionChanged"/>
-        <ComboBox Name="cmbSorting" Grid.Row="1" Grid.Column="1" SelectedIndex="0" VerticalAlignment="Center" Margin="5,0,5,0" ItemsSource="{Binding SortingList}" SelectionChanged="cmbSorting_SelectionChanged"/>
-        <ComboBox Name="cmbFilter" Grid.Row="1" Grid.Column="2" SelectedIndex="0" Margin="5,0,5,0" VerticalAlignment="Center" ItemsSource="{Binding FilterList}" SelectionChanged="cmbFilter_SelectionChanged"/>
+            <ComboBox Name="cmbFilter" Grid.Column="3" SelectedIndex="0" VerticalAlignment="Center" Height="22" Margin="5, 0, 5, 0" SelectionChanged="cmbFilter_SelectionChanged"/>
+        </Grid>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock x:Name="txtResultAmount"/>
-            <TextBlock Text="из"/>
-            <TextBlock x:Name="txtAllAmount"/>
-        </StackPanel>
+        <ListView x:Name="LViewAgents" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="5, 5, 5, 5" d:ItemsSource="{d:SampleData ItemCount=1}" MouseDoubleClick="LViewAgents_MouseDoubleClick" SelectionChanged="LViewAgents_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Идентификатор" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ID}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Пол" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Gender.Name}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Фамилия" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding FirstName}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Имя" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding LastName}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Отчество" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Patronymic}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Дата рождения" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Birthday}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Телефон" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Phone}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Электронная почта" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Email}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Дата добавления" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RegistrationDate}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
 
-
-        <ListView Name="LViewClient" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="5,5,5,5" MouseDoubleClick="LViewClient_MouseDoubleClick">
+                    <GridViewColumn Header="Количество посещений" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding CountService}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Список тегов" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding TagList}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Title, StringFormat='\- {0}'}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                 </Style>
             </ListView.ItemContainerStyle>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="Black" BorderThickness="1" Background="{Binding Background}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="200"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="100"/>
-                            </Grid.ColumnDefinitions>
 
-                            <Image Width="180" Height="100" Margin="5" Source="{Binding ImgPath, FallbackValue={StaticResource defaultImage}}" />
-
-                            <StackPanel Grid.Column="1" Margin="5">
-                                <TextBlock Text="{Binding FirstName}" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding LastName}"/>
-                                <TextBlock Text="{Binding Patronymic}"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Phone}"/>
-                                    <TextBlock Text="{Binding Email, StringFormat ='\   Электронная почта: {0}'}"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
         </ListView>
-        <Button x:Name="btnEditClient" Grid.Row="3" Grid.Column="2" Content="Изменить" HorizontalAlignment="Left" Width="200" Margin="20,0,0,0" Click="btnEditClient_Click"/>
-        <Button x:Name="btnAddNewClient" Content="Добавить клиента" Grid.Row="3" Grid.Column="1" Width="200" HorizontalAlignment="Left" Click="btnAddNewClient_Click"/>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="15, 0, 5, 0">
+                <TextBlock Text="Записей: " HorizontalAlignment="Left"  VerticalAlignment="Center"></TextBlock>
+                <TextBlock x:Name="txtDataCount"  Text="" HorizontalAlignment="Right"  VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text=" из " HorizontalAlignment="Left"  VerticalAlignment="Center"></TextBlock>
+                <TextBlock x:Name="txtFullDataCount"  Text="" HorizontalAlignment="Right"  VerticalAlignment="Center"></TextBlock>
+            </StackPanel>
+            <StackPanel  Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Width="auto" Margin="5, 5, 5, 5">
+                <Button x:Name="back" Content="B" Click="back_Click" IsEnabled="False" Height="30" Width="20" Background="White"  Foreground="Black" Cursor="Hand"></Button>
+                <StackPanel x:Name="pagin" Orientation="Horizontal" HorizontalAlignment="Stretch" Width="auto" ></StackPanel>
+                <Button x:Name="forward" Content="F" Click="forward_Click" Height="30" Width="20" Background="White"  Foreground="Black" Cursor="Hand"></Button>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button x:Name="deleteButton" Margin="5" Height="30" BorderBrush="White" Background="Gray" Foreground="White" Cursor="Hand" Width="100" Grid.Column="0" Content="Удалить" Click="deleteButton_Click" />
+                <Button x:Name="addButton" Margin="5" Height="30" BorderBrush="White"  Background="Gray" Foreground="White" Cursor="Hand" Width="100" Grid.Column="1" Content="Добавить" Click="addButton_Click" />
+                <Button x:Name="rebButton" Margin="5" Height="30" BorderBrush="White" Background="Gray" Foreground="White" Cursor="Hand" Width="100" Grid.Column="1" Content="Обновить" Click="rebButton_Click"  />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>
 
