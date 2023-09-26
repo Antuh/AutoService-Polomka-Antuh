@@ -20,7 +20,14 @@ namespace AutoService.model
             this.DocumentByService = new HashSet<DocumentByService>();
             this.ProductSale = new HashSet<ProductSale>();
         }
-    
+        public int AllFile
+        {
+            get
+            {
+                return this.DocumentByService.Count;
+            }
+        }
+
         public int ClientID { get; set; }
         public System.DateTime StartTime { get; set; }
         public int ServiceID { get; set; }

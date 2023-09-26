@@ -50,3 +50,6 @@ D:\Programmirovanie\Program\AutoService. Polomka. Antuh\AutoService\obj\Debug\pa
 D:\Programmirovanie\Program\AutoService. Polomka. Antuh\AutoService\obj\Debug\pages\ClientsAutoService.baml
 D:\Programmirovanie\Program\AutoService. Polomka. Antuh\AutoService\obj\Debug\window\AddClientWindow.g.cs
 D:\Programmirovanie\Program\AutoService. Polomka. Antuh\AutoService\obj\Debug\window\AddClientWindow.baml
+D:\Programmirovanie\Program\AutoService. Polomka. Antuh\AutoService\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Programmirovanie\Program\AutoService. Polomka. Antuh\AutoService\obj\Debug\window\ClientServiceWindow.g.cs
+D:\Programmirovanie\Program\AutoService. Polomka. Antuh\AutoService\obj\Debug\window\ClientServiceWindow.baml

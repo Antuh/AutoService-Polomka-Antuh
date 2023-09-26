@@ -103,6 +103,13 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+                    <GridViewColumn Header="Дата последнего посещения" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding DateService, Converter={local:DateTimes}}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
 
                     <GridViewColumn Header="Количество посещений" Width="Auto">
                         <GridViewColumn.CellTemplate>
@@ -131,6 +138,11 @@
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                 </Style>
             </ListView.ItemContainerStyle>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="ClientService" Header="Посещения" Click="ClientService_Click" />
+                </ContextMenu>
+            </ListView.ContextMenu>
 
         </ListView>
 

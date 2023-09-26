@@ -67,6 +67,13 @@ namespace AutoService.model
                 return Convert.ToInt32(this.GenderCode) - 1; ;
             }
         }
+        public List<ClientService> ServiceList
+        {
+            get
+            {
+                return this.ClientService.ToList();
+            }
+        }
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

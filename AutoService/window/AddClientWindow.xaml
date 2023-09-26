@@ -93,14 +93,12 @@
                         <Border BorderBrush="Black" BorderThickness="1" Background="{Binding Background}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="231*"/>
+                                    <ColumnDefinition Width="233*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="{Binding Code}"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                <TextBlock Grid.Column="1" Text="{Binding Color}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                <TextBlock  Grid.Column="2" Text="{Binding Title}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-
+                                <!-- <TextBlock Text="{Binding Code}"  VerticalAlignment="Center" HorizontalAlignment="Center"/>-->
+                                <TextBlock Text="{Binding Color}" Margin="63,0,63,0"/>
+                                <TextBlock  Grid.Column="1" Text="{Binding Title}" Margin="101,0,101,0"/>
                             </Grid>
                         </Border>
                     </DataTemplate>

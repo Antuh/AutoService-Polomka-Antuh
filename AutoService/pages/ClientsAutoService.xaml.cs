@@ -81,7 +81,8 @@ namespace AutoService.pages
             "По возрастанию даты последнего посещения",
             "По убыванию даты последнего посещения",
             "По возрастанию посещений",
-            "По убыванию посещений"
+            "По убыванию посещений",
+            "ДР в этом месяце"
         };
 
         private void cmbSorting_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -177,7 +178,8 @@ namespace AutoService.pages
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-
+            AddClientWindow dl = new AddClientWindow(null, db, this);
+            dl.Show();
         }
 
         private void rebButton_Click(object sender, RoutedEventArgs e)
@@ -217,8 +219,8 @@ namespace AutoService.pages
             }
             else
             {
-                AddClientWindow dl = new AddClientWindow(LViewAgents.SelectedItem as Client, db);
-                dl.ShowDialog();
+                AddClientWindow dlg = new AddClientWindow(LViewAgents.SelectedItem as Client, db, this);
+                dlg.Show();
             }
         }
 
@@ -234,6 +236,7 @@ namespace AutoService.pages
                 if (cmbSorting.SelectedIndex == 4) result = result.OrderByDescending(c => c.DateService).ToList();
                 if (cmbSorting.SelectedIndex == 5) result = result.OrderBy(c => c.CountService).ToList();
                 if (cmbSorting.SelectedIndex == 6) result = result.OrderByDescending(c => c.CountService).ToList();
+                if (cmbSorting.SelectedIndex == 7) result = result.Where(c => c.Birthday.HasValue && c.Birthday.Value.Month == DateTime.Now.Month).ToList();
 
                 if (cmbFilter.SelectedIndex != 0) result = result.Where(c => c.GenderCode == cmbFilter.SelectedIndex.ToString()).ToList();
                 result = result.Where(c => c.FirstName.ToLower().Contains(fnd.ToLower())
@@ -241,6 +244,7 @@ namespace AutoService.pages
                               || c.Patronymic.ToLower().Contains(fnd.ToLower())
                               || c.Email.ToLower().Contains(fnd.ToLower())
                               || c.Phone.ToLower().Contains(fnd.ToLower())).ToList();
+
                 count = result.Count();
                 if (cmbCount.SelectedIndex != 0 && cmbCount.SelectedItem != null) result = result.Skip(page * Int32.Parse(cmbCount.SelectedValue.ToString()))
                                                                                                 .Take(Int32.Parse(cmbCount.SelectedValue.ToString())).ToList();
@@ -307,6 +311,19 @@ namespace AutoService.pages
         {
             page = 0;
             Load();
+        }
+
+        private void ClientService_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ClientServiceWindow dl = new ClientServiceWindow(LViewAgents.SelectedItem as Client, db);
+                dl.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

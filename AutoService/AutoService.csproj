@@ -72,6 +72,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="window\ClientServiceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="window\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -134,8 +138,12 @@
     <Compile Include="pages\ClientsAutoService.xaml.cs">
       <DependentUpon>ClientsAutoService.xaml</DependentUpon>
     </Compile>
+    <Compile Include="pages\DateTimes.cs" />
     <Compile Include="window\AddClientWindow.xaml.cs">
       <DependentUpon>AddClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="window\ClientServiceWindow.xaml.cs">
+      <DependentUpon>ClientServiceWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="window\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
