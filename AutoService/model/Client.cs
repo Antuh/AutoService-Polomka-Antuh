@@ -12,6 +12,7 @@ namespace AutoService.model
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.Remoting.Messaging;
 
     public partial class Client
     {
@@ -34,6 +35,36 @@ namespace AutoService.model
             get
             {
                 return this.Tag.ToList();
+            }
+        }
+        public string CountService
+        {
+            get
+            {
+                return this.ClientService.Count.ToString();
+
+            }
+        }
+
+        public System.DateTime DateService
+        {
+            get
+            {
+                using (EntitiesAutos db = new EntitiesAutos()) // Создаем экземпляр EntitiesAutos
+                {
+                    return db.ClientService
+                             .Where(c => c.ClientID == this.ID)
+                             .OrderByDescending(c => c.StartTime)
+                             .Select(c => c.StartTime)
+                             .FirstOrDefault();
+                }
+            }
+        }
+        public int GenderList
+        {
+            get
+            {
+                return Convert.ToInt32(this.GenderCode) - 1; ;
             }
         }
         public int ID { get; set; }

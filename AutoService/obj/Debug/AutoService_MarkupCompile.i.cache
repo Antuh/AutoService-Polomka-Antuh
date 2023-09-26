@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Programmirovanie\Program\AutoService. Polomka. Antuh\AutoService\App.xaml
-31272573175
+31892747127
 2-1147362915
-23-2137552937
+23-1315233705
 18-37938975
-pages\AddClient.xaml;pages\ClientsAutoService.xaml;window\MainWindow.xaml;
+pages\ClientsAutoService.xaml;window\AddClientWindow.xaml;window\MainWindow.xaml;
 
-False
+True
 

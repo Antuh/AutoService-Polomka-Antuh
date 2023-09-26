@@ -1,4 +1,5 @@
 ﻿using AutoService.model;
+using AutoService.window;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -44,10 +45,11 @@ namespace AutoService.pages
     public partial class ClientsAutoService : Page
     {
         EntitiesAutos db = new EntitiesAutos();
-        int pages = 0;
+        int page = 0;
         int count;
         string fnd = "";
-        public ClientsAutoService ()
+
+        public ClientsAutoService(Frame frame)
         {
             InitializeComponent();
             cmbFilter.ItemsSource = FilterList;
@@ -89,15 +91,15 @@ namespace AutoService.pages
 
         private void cmbFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            pages = 0;
+            page = 0;
             Load();
         }
 
         private void back_Click(object sender, RoutedEventArgs e)
         {
-            if (pages >= 0)
+            if (page >= 0)
             {
-                pages--;
+                page--;
                 Load();
             }
         }
@@ -108,9 +110,9 @@ namespace AutoService.pages
             {
                 if (cmbCount.SelectedIndex != 0 && cmbCount.SelectedItem != null)
                 {
-                    if (pages < db.Client.Count() / Int32.Parse(cmbCount.SelectedValue.ToString()) - 1)
+                    if (page < db.Client.Count() / Int32.Parse(cmbCount.SelectedValue.ToString()) - 1)
                     {
-                        pages++;
+                        page++;
                         Load();
                     }
                 }
@@ -137,7 +139,7 @@ namespace AutoService.pages
                         {
                             if (item.ClientService.Count > 0)
                             {
-                                errors.AppendLine($"Клиент {item.ID} не может быть удален");
+                                errors.AppendLine($"Клиент {item.ID} не может быть удален, т.к. есть информация о реализации продукции");
                             }
                             else
                             {
@@ -175,7 +177,7 @@ namespace AutoService.pages
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddClient(null));
+
         }
 
         private void rebButton_Click(object sender, RoutedEventArgs e)
@@ -190,7 +192,7 @@ namespace AutoService.pages
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            pages = 0;
+            page = 0;
             fnd = ((TextBox)sender).Text;
             Load();
         }
@@ -198,6 +200,26 @@ namespace AutoService.pages
         private void LViewAgents_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+        public bool IsWindowOpen<T>(string name = "") where T : Window
+        {
+            return string.IsNullOrEmpty(name)
+                ? Application.Current.Windows.OfType<T>().Any()
+                : Application.Current.Windows.OfType<T>().Any(w => w.Name.Equals(name));
+        }
+
+        private void LViewAgents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+            if (IsWindowOpen<AddClientWindow>())
+            {
+                MessageBox.Show("Окно Редактирования уже открыто.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                AddClientWindow dl = new AddClientWindow(LViewAgents.SelectedItem as Client, db);
+                dl.ShowDialog();
+            }
         }
 
         public void Load()
@@ -208,6 +230,10 @@ namespace AutoService.pages
                 txtFullDataCount.Text = result.Count().ToString();
                 if (cmbSorting.SelectedIndex == 1) result = result.OrderBy(c => c.FirstName).ToList();
                 if (cmbSorting.SelectedIndex == 2) result = result.OrderByDescending(c => c.FirstName).ToList();
+                if (cmbSorting.SelectedIndex == 3) result = result.OrderBy(c => c.DateService).ToList();
+                if (cmbSorting.SelectedIndex == 4) result = result.OrderByDescending(c => c.DateService).ToList();
+                if (cmbSorting.SelectedIndex == 5) result = result.OrderBy(c => c.CountService).ToList();
+                if (cmbSorting.SelectedIndex == 6) result = result.OrderByDescending(c => c.CountService).ToList();
 
                 if (cmbFilter.SelectedIndex != 0) result = result.Where(c => c.GenderCode == cmbFilter.SelectedIndex.ToString()).ToList();
                 result = result.Where(c => c.FirstName.ToLower().Contains(fnd.ToLower())
@@ -216,7 +242,7 @@ namespace AutoService.pages
                               || c.Email.ToLower().Contains(fnd.ToLower())
                               || c.Phone.ToLower().Contains(fnd.ToLower())).ToList();
                 count = result.Count();
-                if (cmbCount.SelectedIndex != 0 && cmbCount.SelectedItem != null) result = result.Skip(pages * Int32.Parse(cmbCount.SelectedValue.ToString()))
+                if (cmbCount.SelectedIndex != 0 && cmbCount.SelectedItem != null) result = result.Skip(page * Int32.Parse(cmbCount.SelectedValue.ToString()))
                                                                                                 .Take(Int32.Parse(cmbCount.SelectedValue.ToString())).ToList();
                 LViewAgents.ItemsSource = result;
                 txtDataCount.Text = count.ToString();
@@ -257,11 +283,11 @@ namespace AutoService.pages
         {
             try
             {
-                if (pages == 0) { back.IsEnabled = false; }
+                if (page == 0) { back.IsEnabled = false; }
                 else { back.IsEnabled = true; };
                 if (cmbCount.SelectedIndex != 0 && cmbCount.SelectedItem != null)
                 {
-                    if ((pages + 1) * Int32.Parse(cmbCount.SelectedValue.ToString()) >= count) { forward.IsEnabled = false; }
+                    if ((page + 1) * Int32.Parse(cmbCount.SelectedValue.ToString()) >= count) { forward.IsEnabled = false; }
                     else { forward.IsEnabled = true; }
                 }
                 else { forward.IsEnabled = false; }
@@ -273,19 +299,14 @@ namespace AutoService.pages
         }
         private void paginButto_Click(object sender, RoutedEventArgs e)
         {
-            pages = Convert.ToInt32(((Button)sender).Tag.ToString());
+            page = Convert.ToInt32(((Button)sender).Tag.ToString());
             Load();
         }
 
         private void cmbCount_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            pages = 0;
+            page = 0;
             Load();
-        }
-
-        private void LViewAgents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            NavigationService.Navigate(new AddClient(LViewAgents.SelectedItem as Client));
         }
     }
 }

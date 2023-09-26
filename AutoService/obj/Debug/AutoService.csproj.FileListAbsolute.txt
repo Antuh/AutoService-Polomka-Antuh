@@ -46,7 +46,7 @@ D:\Programmirovanie\Program\AutoService. Polomka. Antuh\AutoService\obj\Debug\Au
 D:\Programmirovanie\Program\AutoService. Polomka. Antuh\AutoService\obj\Debug\AutoService.csproj.CopyComplete
 D:\Programmirovanie\Program\AutoService. Polomka. Antuh\AutoService\obj\Debug\AutoService.exe
 D:\Programmirovanie\Program\AutoService. Polomka. Antuh\AutoService\obj\Debug\AutoService.pdb
-D:\Programmirovanie\Program\AutoService. Polomka. Antuh\AutoService\obj\Debug\pages\AddClient.g.cs
 D:\Programmirovanie\Program\AutoService. Polomka. Antuh\AutoService\obj\Debug\pages\ClientsAutoService.g.cs
-D:\Programmirovanie\Program\AutoService. Polomka. Antuh\AutoService\obj\Debug\pages\AddClient.baml
 D:\Programmirovanie\Program\AutoService. Polomka. Antuh\AutoService\obj\Debug\pages\ClientsAutoService.baml
+D:\Programmirovanie\Program\AutoService. Polomka. Antuh\AutoService\obj\Debug\window\AddClientWindow.g.cs
+D:\Programmirovanie\Program\AutoService. Polomka. Antuh\AutoService\obj\Debug\window\AddClientWindow.baml

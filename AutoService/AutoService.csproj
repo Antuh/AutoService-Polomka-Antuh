@@ -64,11 +64,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="pages\AddClient.xaml">
+    <Page Include="pages\ClientsAutoService.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="pages\ClientsAutoService.xaml">
+    <Page Include="window\AddClientWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -131,11 +131,11 @@
     <Compile Include="model\Tag.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="pages\AddClient.xaml.cs">
-      <DependentUpon>AddClient.xaml</DependentUpon>
-    </Compile>
     <Compile Include="pages\ClientsAutoService.xaml.cs">
       <DependentUpon>ClientsAutoService.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="window\AddClientWindow.xaml.cs">
+      <DependentUpon>AddClientWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="window\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

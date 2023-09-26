@@ -19,7 +19,14 @@ namespace AutoService.model
         {
             this.Client = new HashSet<Client>();
         }
-    
+        public string Background
+        {
+            get
+            {
+                return "#" + this.Color;
+            }
+        }
+
         public int ID { get; set; }
         public string Title { get; set; }
         public string Color { get; set; }

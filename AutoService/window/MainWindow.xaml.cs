@@ -25,13 +25,26 @@ namespace AutoService
         public MainWindow()
         {
             InitializeComponent();
-            FrmMain.Navigate(new ClientsAutoService());
+            FrmMain.Content = new ClientsAutoService(FrmMain);
         }
+
         private void FrmMain_ContentRendered(object sender, EventArgs e)
         {
-            if (FrmMain.CanGoBack) btnBack.Visibility = Visibility.Visible;
-            else btnBack.Visibility = Visibility.Hidden;
+            if (FrmMain.CanGoBack)
+            {
+                btnBack.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnBack.Visibility = Visibility.Hidden;
+            }
         }
+
+        private void FrmMain_LoadCompleted(object sender, NavigationEventArgs e)
+        {
+
+        }
+
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             FrmMain.GoBack();
